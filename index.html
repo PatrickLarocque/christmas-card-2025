@@ -621,8 +621,8 @@
                 color: #fff;
                 padding: 12px 24px;
                 border-radius: 30px;
-                font-family: "Mountains of Christmas", cursive;
-                font-size: 1.1em;
+                font-family: "inter", monospace;
+                font-size: 0.8em;
                 z-index: 1001;
                 opacity: 0;
                 transition: opacity 0.5s ease;
@@ -2330,7 +2330,7 @@
 
         <!-- Shake hint for snow globe effect -->
         <div class="shake-hint" id="shake-hint">
-            <span>📱</span> Secoue ton appareil pour faire tomber plus de neige!
+            <span>📱</span> Secoue pour plus de neige!
         </div>
 
         <!-- ============================================
@@ -2411,9 +2411,6 @@
         <section id="chats">
             <div class="section-content">
                 <h2>La Gang</h2>
-                <p style="font-size: 1.1em; margin-bottom: 30px; opacity: 0.9">
-                    Clique pour les flatter!
-                </p>
                 <div class="cats-container">
                     <div class="cat-card" onclick="petCat(this, 'Fioche')">
                         <img
@@ -3080,28 +3077,36 @@
                         setTimeout(() => {
                             const bonusFlake = document.createElement("div");
                             bonusFlake.className = "bonus-snowflake";
-                            
+
                             // More variety in snowflake characters
                             const flakeChars = ["❄", "❅", "❆", "*", "•", "∗"];
-                            bonusFlake.textContent = flakeChars[Math.floor(Math.random() * flakeChars.length)];
-                            
+                            bonusFlake.textContent =
+                                flakeChars[
+                                    Math.floor(
+                                        Math.random() * flakeChars.length,
+                                    )
+                                ];
+
                             bonusFlake.style.left = Math.random() * 100 + "%";
                             bonusFlake.style.top = "-20px";
-                            
+
                             // More varied sizes: tiny (0.4em) to medium-large (1.6em)
                             const size = 0.4 + Math.random() * 1.2;
                             bonusFlake.style.fontSize = size + "em";
-                            
+
                             // Vary opacity based on size (smaller = more transparent, like depth)
                             bonusFlake.style.opacity = 0.5 + (size / 1.6) * 0.5;
-                            
+
                             // Vary animation duration for more natural feel
                             const duration = 2.5 + Math.random() * 2;
                             bonusFlake.style.animationDuration = duration + "s";
-                            
+
                             document.body.appendChild(bonusFlake);
 
-                            setTimeout(() => bonusFlake.remove(), duration * 1000 + 500);
+                            setTimeout(
+                                () => bonusFlake.remove(),
+                                duration * 1000 + 500,
+                            );
                         }, i * 80); // Slower spawn rate
                     }
                 }
