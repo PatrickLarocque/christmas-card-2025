@@ -263,7 +263,7 @@
 
             /* Moon with phases */
             .moon {
-                position: absolute;
+                position: fixed;
                 top: 8%;
                 right: 15%;
                 width: 80px;
@@ -281,6 +281,63 @@
                 animation: moonGlow 4s ease-in-out infinite;
                 will-change: transform;
                 transition: transform 0.1s ease-out;
+                cursor: pointer;
+                z-index: 100;
+            }
+
+            .moon:hover {
+                transform: scale(1.1);
+            }
+
+            .moon.clicked {
+                animation: moonPulse 0.5s ease-out;
+            }
+
+            @keyframes moonPulse {
+                0% {
+                    transform: scale(1);
+                    box-shadow:
+                        0 0 40px rgba(255, 253, 231, 0.5),
+                        0 0 80px rgba(255, 253, 231, 0.3);
+                }
+                50% {
+                    transform: scale(1.2);
+                    box-shadow:
+                        0 0 80px rgba(255, 253, 231, 1),
+                        0 0 120px rgba(255, 253, 231, 0.8),
+                        0 0 160px rgba(255, 215, 0, 0.5);
+                }
+                100% {
+                    transform: scale(1);
+                    box-shadow:
+                        0 0 40px rgba(255, 253, 231, 0.5),
+                        0 0 80px rgba(255, 253, 231, 0.3);
+                }
+            }
+
+            /* Magic shooting star from moon */
+            .magic-shooting-star {
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow:
+                    0 0 10px 2px #fff,
+                    0 0 20px 4px rgba(255, 215, 0, 0.5);
+                pointer-events: none;
+                z-index: 1000;
+            }
+
+            .magic-shooting-star::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 100%;
+                width: 80px;
+                height: 2px;
+                background: linear-gradient(to left, #fff, transparent);
+                transform: translateY(-50%);
             }
 
             @keyframes moonGlow {
@@ -331,7 +388,7 @@
             }
 
             .hill-front {
-                width: 100%;
+                width: 140%;
                 height: 200px;
                 left: -20%;
                 background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
@@ -538,6 +595,7 @@
                 text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
                 animation: fall linear infinite;
                 opacity: 0.9;
+                transition: animation-duration 0.5s ease;
             }
 
             @keyframes fall {
@@ -546,6 +604,83 @@
                 }
                 100% {
                     transform: translateY(100vh) rotate(360deg);
+                }
+            }
+
+            /* Snow globe shake effect */
+            .snowflakes.shaking .snowflake {
+                animation-duration: 2s !important;
+            }
+
+            .shake-hint {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.6);
+                color: #fff;
+                padding: 12px 24px;
+                border-radius: 30px;
+                font-family: "Mountains of Christmas", cursive;
+                font-size: 1.1em;
+                z-index: 1001;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+                pointer-events: none;
+                text-align: center;
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .shake-hint.visible {
+                opacity: 1;
+            }
+
+            .shake-hint span {
+                display: inline-block;
+                animation: shakeIcon 1s ease-in-out infinite;
+            }
+
+            @keyframes shakeIcon {
+                0%,
+                100% {
+                    transform: rotate(0deg);
+                }
+                25% {
+                    transform: rotate(-15deg);
+                }
+                75% {
+                    transform: rotate(15deg);
+                }
+            }
+
+            /* Extra snowflakes that appear during shake */
+            .bonus-snowflake {
+                position: fixed;
+                color: #fff;
+                font-size: 1em;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+                pointer-events: none;
+                z-index: 999;
+                animation: bonusFall 3s linear forwards;
+            }
+
+            @keyframes bonusFall {
+                0% {
+                    transform: translateY(-20px) rotate(0deg) translateX(0);
+                }
+                25% {
+                    transform: translateY(25vh) rotate(180deg) translateX(10px);
+                }
+                50% {
+                    transform: translateY(50vh) rotate(360deg) translateX(-10px);
+                }
+                75% {
+                    transform: translateY(75vh) rotate(540deg) translateX(5px);
+                }
+                100% {
+                    transform: translateY(105vh) rotate(720deg) translateX(0);
+                    opacity: 0.3;
                 }
             }
 
@@ -1311,10 +1446,77 @@
                 object-fit: contain;
                 filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
                 transition: transform 0.3s ease;
+                cursor: pointer;
             }
 
             .cat-card:hover .cat-image {
                 transform: scale(1.1);
+            }
+
+            /* Cat pet interaction */
+            .cat-card.being-pet .cat-image {
+                animation: catHappy 0.3s ease-in-out;
+            }
+
+            @keyframes catHappy {
+                0%,
+                100% {
+                    transform: scale(1.1) rotate(0deg);
+                }
+                25% {
+                    transform: scale(1.15) rotate(-3deg);
+                }
+                75% {
+                    transform: scale(1.15) rotate(3deg);
+                }
+            }
+
+            /* Floating hearts from cats */
+            .cat-heart {
+                position: fixed;
+                font-size: 1.5em;
+                pointer-events: none;
+                animation: floatHeart 1s ease-out forwards;
+                z-index: 1000;
+            }
+
+            @keyframes floatHeart {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(0.5);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-80px) scale(1.2);
+                }
+            }
+
+            /* Purr text */
+            .purr-text {
+                position: fixed;
+                font-family: "Mountains of Christmas", cursive;
+                font-size: 1.2em;
+                color: #ffd700;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                pointer-events: none;
+                animation: purrFade 1.2s ease-out forwards;
+                white-space: nowrap;
+                z-index: 1000;
+            }
+
+            @keyframes purrFade {
+                0% {
+                    opacity: 0;
+                    transform: translateY(0) scale(0.8);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translateY(-10px) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-40px) scale(1);
+                }
             }
 
             /* ============================================
@@ -1764,6 +1966,25 @@
             RESPONSIVENESS
            ============================================ */
             @media (max-width: 768px) {
+                /* Hills - widen and center for tablet/mobile screens */
+                .hill-back {
+                    width: 160%;
+                    height: 260px;
+                    left: -30%;
+                }
+
+                .hill-mid {
+                    width: 120%;
+                    height: 210px;
+                    left: -10%;
+                }
+
+                .hill-front {
+                    width: 140%;
+                    height: 170px;
+                    left: -20%;
+                }
+
                 #hero h1 {
                     font-size: 2.5em;
                 }
@@ -1921,6 +2142,25 @@
 
             /* Small mobile adjustments */
             @media (max-width: 480px) {
+                /* Hills - scale down and adjust positioning for small screens */
+                .hill-back {
+                    width: 180%;
+                    height: 200px;
+                    left: -40%;
+                }
+
+                .hill-mid {
+                    width: 140%;
+                    height: 170px;
+                    left: -20%;
+                }
+
+                .hill-front {
+                    width: 160%;
+                    height: 140px;
+                    left: -30%;
+                }
+
                 .gifts-container {
                     gap: 10px;
                 }
@@ -2002,9 +2242,6 @@
             <!-- Magical floating particles -->
             <div class="magical-particles" id="magical-particles"></div>
 
-            <!-- Moon -->
-            <div class="moon"></div>
-
             <!-- Snow-covered hills -->
             <div class="hills">
                 <div class="hill hill-back"></div>
@@ -2031,6 +2268,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Moon (outside scene-background for clickability) -->
+        <div class="moon"></div>
 
         <!-- ============================================
          SNOWFALL
@@ -2086,6 +2326,11 @@
             <div class="snowflake">*</div>
             <div class="snowflake">*</div>
             <div class="snowflake">*</div>
+        </div>
+
+        <!-- Shake hint for snow globe effect -->
+        <div class="shake-hint" id="shake-hint">
+            <span>📱</span> Secoue ton appareil pour faire tomber plus de neige!
         </div>
 
         <!-- ============================================
@@ -2166,8 +2411,11 @@
         <section id="chats">
             <div class="section-content">
                 <h2>La Gang</h2>
+                <p style="font-size: 1.1em; margin-bottom: 30px; opacity: 0.9">
+                    Clique pour les flatter!
+                </p>
                 <div class="cats-container">
-                    <div class="cat-card">
+                    <div class="cat-card" onclick="petCat(this, 'Fioche')">
                         <img
                             src="images/fioche.png"
                             alt="Fioche"
@@ -2175,7 +2423,7 @@
                         />
                         <h3>Fioche</h3>
                     </div>
-                    <div class="cat-card">
+                    <div class="cat-card" onclick="petCat(this, 'Gorgi')">
                         <img
                             src="images/gorgi.png"
                             alt="Gorgi"
@@ -2183,7 +2431,7 @@
                         />
                         <h3>Gorgi</h3>
                     </div>
-                    <div class="cat-card">
+                    <div class="cat-card" onclick="petCat(this, 'Bouquet')">
                         <img
                             src="images/bouquet.png"
                             alt="Bouquet"
@@ -2474,10 +2722,7 @@
                         document.body.scrollHeight - window.innerHeight;
                     const scrollPercent = scrollY / maxScroll;
 
-                    // Moon moves slowly upward as you scroll down
-                    if (moon) {
-                        moon.style.transform = `translateY(${scrollY * 0.15}px)`;
-                    }
+                    // Moon stays fixed - no parallax (looks better)
 
                     // Stars drift slightly
                     if (stars) {
@@ -2637,10 +2882,230 @@
                 generateMagicalParticles();
                 generateTrees();
                 initParallax();
+                initMoonClick();
+                initSnowGlobeShake();
                 document
                     .querySelector("#hero .section-content")
                     .classList.add("visible");
             });
+
+            // ============================================
+            // MOON CLICK - SHOOTING STARS
+            // ============================================
+            function initMoonClick() {
+                const moon = document.querySelector(".moon");
+                if (!moon) return;
+
+                moon.addEventListener("click", () => {
+                    // Add pulse animation
+                    moon.classList.add("clicked");
+                    setTimeout(() => moon.classList.remove("clicked"), 500);
+
+                    // Create multiple shooting stars from the moon
+                    const moonRect = moon.getBoundingClientRect();
+                    const moonCenterX = moonRect.left + moonRect.width / 2;
+                    const moonCenterY = moonRect.top + moonRect.height / 2;
+
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createMagicShootingStar(moonCenterX, moonCenterY);
+                        }, i * 150);
+                    }
+                });
+            }
+
+            function createMagicShootingStar(startX, startY) {
+                const star = document.createElement("div");
+                star.className = "magic-shooting-star";
+                star.style.left = startX + "px";
+                star.style.top = startY + "px";
+                document.body.appendChild(star);
+
+                // Random angle (mostly downward-left, between 200-250 degrees)
+                const angle = (200 + Math.random() * 50) * (Math.PI / 180);
+                const speed = 8 + Math.random() * 6;
+
+                let x = startX;
+                let y = startY;
+                let opacity = 1;
+
+                function animate() {
+                    x += Math.cos(angle) * speed;
+                    y -= Math.sin(angle) * speed; // negative because screen Y is inverted
+                    opacity -= 0.02;
+
+                    star.style.left = x + "px";
+                    star.style.top = y + "px";
+                    star.style.opacity = opacity;
+                    star.style.transform = `rotate(${(Math.atan2(-Math.sin(angle), Math.cos(angle)) * 180) / Math.PI}deg)`;
+
+                    if (opacity > 0 && y < window.innerHeight + 100) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        star.remove();
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // ============================================
+            // PET THE CATS - HEARTS & PURR
+            // ============================================
+            function petCat(catCard, catName) {
+                // Add wiggle animation
+                catCard.classList.add("being-pet");
+                setTimeout(() => catCard.classList.remove("being-pet"), 300);
+
+                // Create floating hearts
+                const rect = catCard.getBoundingClientRect();
+                const numHearts = 3 + Math.floor(Math.random() * 3);
+
+                for (let i = 0; i < numHearts; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement("div");
+                        heart.className = "cat-heart";
+                        heart.textContent = ["❤️", "💕", "💖", "🧡", "💛"][
+                            Math.floor(Math.random() * 5)
+                        ];
+                        heart.style.left =
+                            rect.left +
+                            rect.width * 0.2 +
+                            Math.random() * rect.width * 0.6 +
+                            "px";
+                        heart.style.top =
+                            rect.top + 20 + Math.random() * 30 + "px";
+                        document.body.appendChild(heart);
+
+                        setTimeout(() => heart.remove(), 1000);
+                    }, i * 100);
+                }
+
+                // Show purr text
+                const purrs = [
+                    "Prrrr...",
+                    "Mrrrow!",
+                    "*ronron*",
+                    "Miaou!",
+                    "😻",
+                ];
+                const purr = document.createElement("div");
+                purr.className = "purr-text";
+                purr.textContent =
+                    purrs[Math.floor(Math.random() * purrs.length)];
+                purr.style.left = rect.left + rect.width / 2 + "px";
+                purr.style.top = rect.top - 10 + "px";
+                purr.style.transform = "translateX(-50%)";
+                document.body.appendChild(purr);
+
+                setTimeout(() => purr.remove(), 1200);
+            }
+
+            // ============================================
+            // SNOW GLOBE SHAKE EFFECT
+            // ============================================
+            function initSnowGlobeShake() {
+                const snowflakes = document.querySelector(".snowflakes");
+                const shakeHint = document.getElementById("shake-hint");
+                let shakeTimeout;
+                let hintShown = false;
+
+                // Show hint after a few seconds on mobile
+                if ("DeviceMotionEvent" in window) {
+                    setTimeout(() => {
+                        if (!hintShown) {
+                            shakeHint.classList.add("visible");
+                            hintShown = true;
+                            setTimeout(() => {
+                                shakeHint.classList.remove("visible");
+                            }, 5000);
+                        }
+                    }, 3000);
+                }
+
+                // Device motion detection (mobile shake)
+                if ("DeviceMotionEvent" in window) {
+                    let lastX = 0,
+                        lastY = 0,
+                        lastZ = 0;
+                    let lastShake = 0;
+
+                    window.addEventListener("devicemotion", (e) => {
+                        const acc = e.accelerationIncludingGravity;
+                        if (!acc) return;
+
+                        const deltaX = Math.abs(acc.x - lastX);
+                        const deltaY = Math.abs(acc.y - lastY);
+                        const deltaZ = Math.abs(acc.z - lastZ);
+
+                        if (
+                            (deltaX > 15 || deltaY > 15 || deltaZ > 15) &&
+                            Date.now() - lastShake > 500
+                        ) {
+                            lastShake = Date.now();
+                            triggerSnowGlobeEffect();
+
+                            // Hide hint once they've shaken
+                            shakeHint.classList.remove("visible");
+                        }
+
+                        lastX = acc.x;
+                        lastY = acc.y;
+                        lastZ = acc.z;
+                    });
+                }
+
+                // Also allow spacebar or click on page for desktop
+                document.addEventListener("keydown", (e) => {
+                    if (
+                        e.code === "Space" &&
+                        !e.target.matches("input, textarea")
+                    ) {
+                        e.preventDefault();
+                        triggerSnowGlobeEffect();
+                    }
+                });
+
+                function triggerSnowGlobeEffect() {
+                    // Speed up existing snowflakes briefly
+                    snowflakes.classList.add("shaking");
+                    clearTimeout(shakeTimeout);
+                    shakeTimeout = setTimeout(() => {
+                        snowflakes.classList.remove("shaking");
+                    }, 2000);
+
+                    // Add bonus snowflakes - fewer, more varied sizes
+                    const flakeCount = 12 + Math.floor(Math.random() * 8); // 12-20 flakes
+                    for (let i = 0; i < flakeCount; i++) {
+                        setTimeout(() => {
+                            const bonusFlake = document.createElement("div");
+                            bonusFlake.className = "bonus-snowflake";
+                            
+                            // More variety in snowflake characters
+                            const flakeChars = ["❄", "❅", "❆", "*", "•", "∗"];
+                            bonusFlake.textContent = flakeChars[Math.floor(Math.random() * flakeChars.length)];
+                            
+                            bonusFlake.style.left = Math.random() * 100 + "%";
+                            bonusFlake.style.top = "-20px";
+                            
+                            // More varied sizes: tiny (0.4em) to medium-large (1.6em)
+                            const size = 0.4 + Math.random() * 1.2;
+                            bonusFlake.style.fontSize = size + "em";
+                            
+                            // Vary opacity based on size (smaller = more transparent, like depth)
+                            bonusFlake.style.opacity = 0.5 + (size / 1.6) * 0.5;
+                            
+                            // Vary animation duration for more natural feel
+                            const duration = 2.5 + Math.random() * 2;
+                            bonusFlake.style.animationDuration = duration + "s";
+                            
+                            document.body.appendChild(bonusFlake);
+
+                            setTimeout(() => bonusFlake.remove(), duration * 1000 + 500);
+                        }, i * 80); // Slower spawn rate
+                    }
+                }
+            }
         </script>
     </body>
 </html>
