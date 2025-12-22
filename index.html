@@ -1,0 +1,2646 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Joyeux Noel Caroline</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Quicksand:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* ============================================
+           BASE STYLES
+           ============================================ */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Quicksand", sans-serif;
+                color: #fff;
+                overflow-x: hidden;
+                min-height: 100vh;
+            }
+
+            h1,
+            h2,
+            h3 {
+                font-family: "Mountains of Christmas", cursive;
+                font-weight: 700;
+            }
+
+            /* ============================================
+           CHRISTMAS SCENE BACKGROUND - STORY MODE
+           ============================================ */
+            .scene-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                background: linear-gradient(
+                    180deg,
+                    #0a1628 0%,
+                    #1a237e 20%,
+                    #283593 40%,
+                    #3949ab 60%,
+                    #5c6bc0 80%,
+                    #7986cb 100%
+                );
+                transition: all 2s ease;
+            }
+
+            /* Animated stars */
+            .stars {
+                position: absolute;
+                width: 100%;
+                height: 60%;
+                top: 0;
+            }
+
+            /* Aurora Borealis effect */
+            .aurora {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                overflow: hidden;
+                opacity: 0.4;
+                pointer-events: none;
+            }
+
+            .aurora-wave {
+                position: absolute;
+                width: 200%;
+                height: 100%;
+                background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(0, 255, 150, 0.1) 20%,
+                    rgba(0, 200, 255, 0.15) 40%,
+                    rgba(100, 150, 255, 0.1) 60%,
+                    transparent 80%
+                );
+                animation: auroraWave 15s ease-in-out infinite;
+                filter: blur(30px);
+            }
+
+            .aurora-wave:nth-child(2) {
+                background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(150, 100, 255, 0.1) 30%,
+                    rgba(0, 255, 200, 0.12) 50%,
+                    transparent 70%
+                );
+                animation-delay: -5s;
+                animation-duration: 18s;
+            }
+
+            .aurora-wave:nth-child(3) {
+                background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(0, 200, 150, 0.08) 25%,
+                    rgba(100, 200, 255, 0.1) 45%,
+                    transparent 65%
+                );
+                animation-delay: -10s;
+                animation-duration: 20s;
+            }
+
+            @keyframes auroraWave {
+                0%,
+                100% {
+                    transform: translateX(-25%) translateY(0) scaleY(1);
+                }
+                25% {
+                    transform: translateX(-15%) translateY(10px) scaleY(1.1);
+                }
+                50% {
+                    transform: translateX(-25%) translateY(-5px) scaleY(0.9);
+                }
+                75% {
+                    transform: translateX(-35%) translateY(5px) scaleY(1.05);
+                }
+            }
+
+            .star {
+                position: absolute;
+                background: #fff;
+                border-radius: 50%;
+                animation: twinkle 3s ease-in-out infinite;
+            }
+
+            @keyframes twinkle {
+                0%,
+                100% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1.2);
+                }
+            }
+
+            /* Shooting stars */
+            .shooting-star {
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: #fff;
+                box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+                animation: shoot 3s linear infinite;
+                opacity: 0;
+            }
+
+            @keyframes shoot {
+                0% {
+                    transform: translateX(0) translateY(0);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateX(-300px) translateY(300px);
+                    opacity: 0;
+                }
+            }
+
+            /* Floating magical sparkles */
+            .magical-particles {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 5;
+                overflow: hidden;
+            }
+
+            .particle {
+                position: absolute;
+                border-radius: 50%;
+                animation: floatParticle linear infinite;
+                opacity: 0;
+            }
+
+            .particle.gold {
+                background: radial-gradient(
+                    circle,
+                    #ffd700 0%,
+                    rgba(255, 215, 0, 0) 70%
+                );
+                box-shadow:
+                    0 0 10px #ffd700,
+                    0 0 20px rgba(255, 215, 0, 0.5);
+            }
+
+            .particle.white {
+                background: radial-gradient(
+                    circle,
+                    #fff 0%,
+                    rgba(255, 255, 255, 0) 70%
+                );
+                box-shadow:
+                    0 0 8px #fff,
+                    0 0 15px rgba(255, 255, 255, 0.5);
+            }
+
+            .particle.blue {
+                background: radial-gradient(
+                    circle,
+                    #87ceeb 0%,
+                    rgba(135, 206, 235, 0) 70%
+                );
+                box-shadow:
+                    0 0 8px #87ceeb,
+                    0 0 15px rgba(135, 206, 235, 0.5);
+            }
+
+            @keyframes floatParticle {
+                0% {
+                    transform: translateY(100vh) translateX(0) scale(0);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.8;
+                    transform: translateY(80vh) translateX(20px) scale(1);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateY(40vh) translateX(-20px) scale(1.2);
+                }
+                90% {
+                    opacity: 0.6;
+                    transform: translateY(10vh) translateX(30px) scale(0.8);
+                }
+                100% {
+                    transform: translateY(-10vh) translateX(0) scale(0);
+                    opacity: 0;
+                }
+            }
+
+            /* Moon with phases */
+            .moon {
+                position: absolute;
+                top: 8%;
+                right: 15%;
+                width: 80px;
+                height: 80px;
+                background: radial-gradient(
+                    circle at 30% 30%,
+                    #fffde7 0%,
+                    #fff9c4 50%,
+                    #fff59d 100%
+                );
+                border-radius: 50%;
+                box-shadow:
+                    0 0 40px rgba(255, 253, 231, 0.5),
+                    0 0 80px rgba(255, 253, 231, 0.3);
+                animation: moonGlow 4s ease-in-out infinite;
+                will-change: transform;
+                transition: transform 0.1s ease-out;
+            }
+
+            @keyframes moonGlow {
+                0%,
+                100% {
+                    box-shadow:
+                        0 0 40px rgba(255, 253, 231, 0.5),
+                        0 0 80px rgba(255, 253, 231, 0.3);
+                }
+                50% {
+                    box-shadow:
+                        0 0 60px rgba(255, 253, 231, 0.7),
+                        0 0 100px rgba(255, 253, 231, 0.5);
+                }
+            }
+
+            /* Snow-covered hills with depth */
+            .hills {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 40%;
+                will-change: transform;
+            }
+
+            .hill {
+                position: absolute;
+                bottom: 0;
+                border-radius: 50% 50% 0 0;
+                will-change: transform;
+                transition: transform 0.1s ease-out;
+            }
+
+            .hill-back {
+                width: 120%;
+                height: 300px;
+                left: -10%;
+                background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%);
+                opacity: 0.7;
+            }
+
+            .hill-mid {
+                width: 80%;
+                height: 250px;
+                left: 30%;
+                background: linear-gradient(180deg, #e8f5e9 0%, #dcedc8 100%);
+                opacity: 0.8;
+            }
+
+            .hill-front {
+                width: 100%;
+                height: 200px;
+                left: -20%;
+                background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+            }
+
+            /* Pine trees with wind animation */
+            .trees {
+                position: absolute;
+                bottom: 100px;
+                width: 100%;
+                height: 300px;
+                will-change: transform;
+                transition: transform 0.1s ease-out;
+            }
+
+            .tree {
+                position: absolute;
+                bottom: 0;
+                animation: sway 6s ease-in-out infinite;
+                transform-origin: bottom center;
+            }
+
+            @keyframes sway {
+                0%,
+                100% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(1deg);
+                }
+            }
+
+            .tree-trunk {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #5d4037;
+                border-radius: 3px;
+            }
+
+            .tree-layer {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: solid transparent;
+                border-right: solid transparent;
+                border-bottom: solid #2e7d32;
+                transition: filter 0.3s ease;
+            }
+
+            /* Tree snow caps - removed, looked unnatural */
+
+            /* Animated cabin with lights */
+            .cabin {
+                position: absolute;
+                bottom: 80px;
+                right: 15%;
+                width: 100px;
+                height: 80px;
+                will-change: transform;
+                transition: transform 0.1s ease-out;
+            }
+
+            .cabin-body {
+                position: absolute;
+                bottom: 0;
+                width: 80px;
+                height: 50px;
+                background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
+                border-radius: 3px;
+            }
+
+            .cabin-roof {
+                position: absolute;
+                bottom: 45px;
+                left: -10px;
+                width: 0;
+                height: 0;
+                border-left: 50px solid transparent;
+                border-right: 50px solid transparent;
+                border-bottom: 40px solid #5d4037;
+            }
+
+            .cabin-window {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background: #ffeb3b;
+                bottom: 20px;
+                border-radius: 2px;
+                box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+                animation: windowFlicker 4s ease-in-out infinite;
+            }
+
+            @keyframes windowFlicker {
+                0%,
+                100% {
+                    box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+                }
+                50% {
+                    box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+                }
+            }
+
+            .cabin-door {
+                position: absolute;
+                width: 20px;
+                height: 30px;
+                background: #4e342e;
+                bottom: 0;
+                left: 30px;
+                border-radius: 3px 3px 0 0;
+            }
+
+            /* Chimney smoke */
+            .cabin-chimney {
+                position: absolute;
+                bottom: 78%;
+                right: 32px;
+                width: 12px;
+                height: 20px;
+                background: #5d4037;
+            }
+
+            .smoke {
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                width: 8px;
+                height: 8px;
+                background: rgba(200, 200, 200, 0.6);
+                border-radius: 50%;
+                animation: smokeRise 4s ease-out infinite;
+            }
+
+            .smoke:nth-child(2) {
+                animation-delay: 1.5s;
+            }
+
+            .smoke:nth-child(3) {
+                animation-delay: 3s;
+            }
+
+            @keyframes smokeRise {
+                0% {
+                    transform: translateX(-50%) translateY(0) scale(1);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translateX(calc(-50% + 20px)) translateY(-60px)
+                        scale(3);
+                    opacity: 0;
+                }
+            }
+
+            /* Warm cabin glow */
+            .cabin-glow {
+                position: absolute;
+                bottom: -10px;
+                left: -20px;
+                width: 140px;
+                height: 100px;
+                background: radial-gradient(
+                    ellipse at center bottom,
+                    rgba(255, 235, 59, 0.2) 0%,
+                    transparent 70%
+                );
+                animation: cabinGlow 3s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes cabinGlow {
+                0%,
+                100% {
+                    opacity: 0.5;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.8;
+                    transform: scale(1.1);
+                }
+            }
+
+            /* ============================================
+           SNOWFALL ANIMATION
+           ============================================ */
+            .snowflakes {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1000;
+                overflow: hidden;
+            }
+
+            .snowflake {
+                position: absolute;
+                top: -10px;
+                color: #fff;
+                font-size: 1em;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+                animation: fall linear infinite;
+                opacity: 0.9;
+            }
+
+            @keyframes fall {
+                0% {
+                    transform: translateY(-10px) rotate(0deg);
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                }
+            }
+
+            /* Generate 50 snowflakes with different positions and timings */
+            .snowflake:nth-child(1) {
+                left: 2%;
+                animation-duration: 10s;
+                animation-delay: 0s;
+                font-size: 0.8em;
+            }
+            .snowflake:nth-child(2) {
+                left: 5%;
+                animation-duration: 12s;
+                animation-delay: 1s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(3) {
+                left: 8%;
+                animation-duration: 8s;
+                animation-delay: 0.5s;
+                font-size: 0.6em;
+            }
+            .snowflake:nth-child(4) {
+                left: 12%;
+                animation-duration: 14s;
+                animation-delay: 2s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(5) {
+                left: 15%;
+                animation-duration: 9s;
+                animation-delay: 0.3s;
+                font-size: 0.9em;
+            }
+            .snowflake:nth-child(6) {
+                left: 18%;
+                animation-duration: 11s;
+                animation-delay: 1.5s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(7) {
+                left: 22%;
+                animation-duration: 13s;
+                animation-delay: 0.8s;
+                font-size: 0.7em;
+            }
+            .snowflake:nth-child(8) {
+                left: 25%;
+                animation-duration: 10s;
+                animation-delay: 2.5s;
+                font-size: 1.3em;
+            }
+            .snowflake:nth-child(9) {
+                left: 28%;
+                animation-duration: 15s;
+                animation-delay: 0.2s;
+                font-size: 0.5em;
+            }
+            .snowflake:nth-child(10) {
+                left: 32%;
+                animation-duration: 8s;
+                animation-delay: 1.8s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(11) {
+                left: 35%;
+                animation-duration: 12s;
+                animation-delay: 0.6s;
+                font-size: 0.8em;
+            }
+            .snowflake:nth-child(12) {
+                left: 38%;
+                animation-duration: 9s;
+                animation-delay: 3s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(13) {
+                left: 42%;
+                animation-duration: 14s;
+                animation-delay: 0.4s;
+                font-size: 0.6em;
+            }
+            .snowflake:nth-child(14) {
+                left: 45%;
+                animation-duration: 11s;
+                animation-delay: 2.2s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(15) {
+                left: 48%;
+                animation-duration: 10s;
+                animation-delay: 1.2s;
+                font-size: 0.9em;
+            }
+            .snowflake:nth-child(16) {
+                left: 52%;
+                animation-duration: 13s;
+                animation-delay: 0.7s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(17) {
+                left: 55%;
+                animation-duration: 8s;
+                animation-delay: 2.8s;
+                font-size: 0.7em;
+            }
+            .snowflake:nth-child(18) {
+                left: 58%;
+                animation-duration: 15s;
+                animation-delay: 0.1s;
+                font-size: 1.3em;
+            }
+            .snowflake:nth-child(19) {
+                left: 62%;
+                animation-duration: 12s;
+                animation-delay: 1.6s;
+                font-size: 0.5em;
+            }
+            .snowflake:nth-child(20) {
+                left: 65%;
+                animation-duration: 9s;
+                animation-delay: 0.9s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(21) {
+                left: 68%;
+                animation-duration: 11s;
+                animation-delay: 2.4s;
+                font-size: 0.8em;
+            }
+            .snowflake:nth-child(22) {
+                left: 72%;
+                animation-duration: 14s;
+                animation-delay: 0.3s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(23) {
+                left: 75%;
+                animation-duration: 10s;
+                animation-delay: 1.9s;
+                font-size: 0.6em;
+            }
+            .snowflake:nth-child(24) {
+                left: 78%;
+                animation-duration: 8s;
+                animation-delay: 0.5s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(25) {
+                left: 82%;
+                animation-duration: 13s;
+                animation-delay: 2.6s;
+                font-size: 0.9em;
+            }
+            .snowflake:nth-child(26) {
+                left: 85%;
+                animation-duration: 12s;
+                animation-delay: 0.2s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(27) {
+                left: 88%;
+                animation-duration: 9s;
+                animation-delay: 1.4s;
+                font-size: 0.7em;
+            }
+            .snowflake:nth-child(28) {
+                left: 92%;
+                animation-duration: 15s;
+                animation-delay: 0.8s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(29) {
+                left: 95%;
+                animation-duration: 11s;
+                animation-delay: 2.1s;
+                font-size: 0.5em;
+            }
+            .snowflake:nth-child(30) {
+                left: 98%;
+                animation-duration: 10s;
+                animation-delay: 0.6s;
+                font-size: 1.3em;
+            }
+            .snowflake:nth-child(31) {
+                left: 3%;
+                animation-duration: 14s;
+                animation-delay: 1.7s;
+                font-size: 0.8em;
+            }
+            .snowflake:nth-child(32) {
+                left: 7%;
+                animation-duration: 8s;
+                animation-delay: 0.4s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(33) {
+                left: 13%;
+                animation-duration: 12s;
+                animation-delay: 2.9s;
+                font-size: 0.6em;
+            }
+            .snowflake:nth-child(34) {
+                left: 17%;
+                animation-duration: 9s;
+                animation-delay: 0.1s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(35) {
+                left: 23%;
+                animation-duration: 13s;
+                animation-delay: 1.3s;
+                font-size: 0.9em;
+            }
+            .snowflake:nth-child(36) {
+                left: 27%;
+                animation-duration: 11s;
+                animation-delay: 0.7s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(37) {
+                left: 33%;
+                animation-duration: 10s;
+                animation-delay: 2.3s;
+                font-size: 0.7em;
+            }
+            .snowflake:nth-child(38) {
+                left: 37%;
+                animation-duration: 15s;
+                animation-delay: 0.9s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(39) {
+                left: 43%;
+                animation-duration: 8s;
+                animation-delay: 1.1s;
+                font-size: 0.5em;
+            }
+            .snowflake:nth-child(40) {
+                left: 47%;
+                animation-duration: 14s;
+                animation-delay: 2.7s;
+                font-size: 1.3em;
+            }
+            .snowflake:nth-child(41) {
+                left: 53%;
+                animation-duration: 12s;
+                animation-delay: 0.2s;
+                font-size: 0.8em;
+            }
+            .snowflake:nth-child(42) {
+                left: 57%;
+                animation-duration: 9s;
+                animation-delay: 1.8s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(43) {
+                left: 63%;
+                animation-duration: 11s;
+                animation-delay: 0.5s;
+                font-size: 0.6em;
+            }
+            .snowflake:nth-child(44) {
+                left: 67%;
+                animation-duration: 13s;
+                animation-delay: 2s;
+                font-size: 1.2em;
+            }
+            .snowflake:nth-child(45) {
+                left: 73%;
+                animation-duration: 10s;
+                animation-delay: 0.3s;
+                font-size: 0.9em;
+            }
+            .snowflake:nth-child(46) {
+                left: 77%;
+                animation-duration: 8s;
+                animation-delay: 1.5s;
+                font-size: 1.1em;
+            }
+            .snowflake:nth-child(47) {
+                left: 83%;
+                animation-duration: 15s;
+                animation-delay: 0.8s;
+                font-size: 0.7em;
+            }
+            .snowflake:nth-child(48) {
+                left: 87%;
+                animation-duration: 14s;
+                animation-delay: 2.4s;
+                font-size: 1em;
+            }
+            .snowflake:nth-child(49) {
+                left: 93%;
+                animation-duration: 12s;
+                animation-delay: 0.6s;
+                font-size: 0.5em;
+            }
+            .snowflake:nth-child(50) {
+                left: 97%;
+                animation-duration: 9s;
+                animation-delay: 1.2s;
+                font-size: 1.3em;
+            }
+
+            /* ============================================
+           SECTIONS - GENERAL STYLING
+           ============================================ */
+            section {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 60px 20px;
+                position: relative;
+                z-index: 10;
+            }
+
+            .section-content {
+                max-width: 800px;
+                text-align: center;
+                opacity: 0;
+                transform: translateY(50px);
+                transition:
+                    opacity 1s ease,
+                    transform 1s ease;
+            }
+
+            .section-content.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Staggered animations for child elements */
+            .section-content.visible > * {
+                animation: fadeInUp 0.8s ease forwards;
+                opacity: 0;
+            }
+
+            /* Exclude hero section from staggered animations - it has its own */
+            #hero .section-content.visible > * {
+                animation: none;
+                opacity: 1;
+            }
+
+            .section-content.visible > *:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            .section-content.visible > *:nth-child(2) {
+                animation-delay: 0.25s;
+            }
+            .section-content.visible > *:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+            .section-content.visible > *:nth-child(4) {
+                animation-delay: 0.55s;
+            }
+            .section-content.visible > *:nth-child(5) {
+                animation-delay: 0.7s;
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Special entrance for avatars */
+            .avatars-container .avatar {
+                opacity: 0;
+            }
+
+            .section-content.visible .avatars-container .avatar:first-child {
+                animation: slideInLeft 0.8s ease 0.3s forwards;
+            }
+
+            .section-content.visible .avatars-container .sparkle {
+                animation: popIn 0.5s ease 0.6s forwards;
+                opacity: 0;
+            }
+
+            .section-content.visible .avatars-container .avatar:last-child {
+                animation: slideInRight 0.8s ease 0.3s forwards;
+            }
+
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50px) rotate(-10deg);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0) rotate(0deg);
+                }
+            }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(50px) rotate(10deg);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0) rotate(0deg);
+                }
+            }
+
+            @keyframes popIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            /* Cat cards staggered entrance */
+            .cats-container .cat-card {
+                opacity: 0;
+            }
+
+            .section-content.visible .cats-container .cat-card:nth-child(1) {
+                animation: bounceIn 0.8s ease 0.2s forwards;
+            }
+
+            .section-content.visible .cats-container .cat-card:nth-child(2) {
+                animation: bounceIn 0.8s ease 0.4s forwards;
+            }
+
+            .section-content.visible .cats-container .cat-card:nth-child(3) {
+                animation: bounceIn 0.8s ease 0.6s forwards;
+            }
+
+            @keyframes bounceIn {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.3) translateY(50px);
+                }
+                50% {
+                    transform: scale(1.05) translateY(-10px);
+                }
+                70% {
+                    transform: scale(0.95) translateY(5px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+
+            /* Gift boxes staggered entrance */
+            .gifts-container .gift-wrapper {
+                opacity: 0;
+            }
+
+            .section-content.visible
+                .gifts-container
+                .gift-wrapper:nth-child(1) {
+                animation: giftAppear 0.8s ease 0.2s forwards;
+            }
+
+            .section-content.visible
+                .gifts-container
+                .gift-wrapper:nth-child(2) {
+                animation: giftAppear 0.8s ease 0.4s forwards;
+            }
+
+            .section-content.visible
+                .gifts-container
+                .gift-wrapper:nth-child(3) {
+                animation: giftAppear 0.8s ease 0.6s forwards;
+            }
+
+            @keyframes giftAppear {
+                0% {
+                    opacity: 0;
+                    transform: scale(0) rotate(-20deg);
+                }
+                60% {
+                    transform: scale(1.1) rotate(5deg);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1) rotate(0deg);
+                }
+            }
+
+            /* Note card special entrance */
+            .section-content.visible .note-card {
+                animation: noteFlip 1s ease 0.2s forwards;
+                opacity: 0;
+                transform-style: preserve-3d;
+            }
+
+            @keyframes noteFlip {
+                0% {
+                    opacity: 0;
+                    transform: rotateX(-90deg) rotate(-1deg);
+                }
+                100% {
+                    opacity: 1;
+                    transform: rotateX(0deg) rotate(-1deg);
+                }
+            }
+
+            /* ============================================
+           HERO SECTION
+           ============================================ */
+            #hero {
+                padding-top: 80px;
+            }
+
+            #hero .section-content {
+                position: relative;
+            }
+
+            #hero h1 {
+                font-family: "Mountains of Christmas", cursive;
+                font-size: 4.5em;
+                font-weight: 700;
+                color: #ffd700;
+                text-shadow:
+                    3px 3px 6px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(255, 215, 0, 0.3);
+                margin-bottom: 20px;
+                animation:
+                    glow 2s ease-in-out infinite alternate,
+                    heroTitleEntrance 1.5s ease-out;
+                position: relative;
+                z-index: 20;
+            }
+
+            @keyframes heroTitleEntrance {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-50px) scale(0.8);
+                    filter: blur(10px);
+                }
+                50% {
+                    opacity: 1;
+                    filter: blur(0);
+                }
+                70% {
+                    transform: translateY(10px) scale(1.05);
+                }
+                100% {
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            @keyframes glow {
+                from {
+                    text-shadow:
+                        0 0 20px #ffd700,
+                        0 0 30px #ffd700,
+                        3px 3px 6px rgba(0, 0, 0, 0.5);
+                }
+                to {
+                    text-shadow:
+                        0 0 30px #ffd700,
+                        0 0 50px #ffa000,
+                        3px 3px 6px rgba(0, 0, 0, 0.5);
+                }
+            }
+
+            /* Hero subtitle styling */
+            #hero .subtitle {
+                font-family: "Mountains of Christmas", cursive;
+                font-size: 1.5em;
+                color: #fff;
+                text-shadow:
+                    2px 2px 4px rgba(0, 0, 0, 0.5),
+                    0 0 15px rgba(255, 255, 255, 0.3);
+                animation: subtitleEntrance 1.8s ease-out 0.3s both;
+            }
+
+            @keyframes subtitleEntrance {
+                0% {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                100% {
+                    opacity: 0.95;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Decorative snowflake ornaments around title */
+            .hero-ornaments {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                top: 0;
+                left: 0;
+            }
+
+            .hero-ornament {
+                position: absolute;
+                font-size: 2em;
+                animation: floatOrnament 4s ease-in-out infinite;
+                opacity: 0.8;
+            }
+
+            .hero-ornament:nth-child(1) {
+                top: -20px;
+                left: 10%;
+                animation-delay: 0s;
+            }
+            .hero-ornament:nth-child(2) {
+                top: 20px;
+                right: 10%;
+                animation-delay: 0.5s;
+            }
+            .hero-ornament:nth-child(3) {
+                bottom: 40px;
+                left: 5%;
+                animation-delay: 1s;
+            }
+            .hero-ornament:nth-child(4) {
+                bottom: 60px;
+                right: 5%;
+                animation-delay: 1.5s;
+            }
+
+            @keyframes floatOrnament {
+                0%,
+                100% {
+                    transform: translateY(0) rotate(0deg);
+                }
+                50% {
+                    transform: translateY(-15px) rotate(10deg);
+                }
+            }
+
+            .scroll-indicator {
+                margin-top: 50px;
+            }
+
+            .scroll-indicator span {
+                display: block;
+                font-size: 2.5em;
+                animation: handBounce 1s ease-in-out infinite;
+                cursor: pointer;
+            }
+
+            @keyframes handBounce {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(15px);
+                }
+            }
+
+            /* ============================================
+           INTRO MESSAGE SECTION
+           ============================================ */
+            .message-card {
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                padding: 40px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            .message-card p {
+                font-size: 1.4em;
+                line-height: 1.8;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            }
+
+            /* ============================================
+           AVATARS SECTION
+           ============================================ */
+            .avatars-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+
+            .avatar {
+                width: 200px;
+                height: 200px;
+                border-radius: 20px;
+                border: 4px solid #ffd700;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                object-fit: contain;
+                background: rgba(255, 255, 255, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .avatar:hover {
+                transform: scale(1.05);
+            }
+
+            .sparkle {
+                font-size: 2.5em;
+                animation: sparkle 1.5s ease-in-out infinite;
+            }
+
+            @keyframes sparkle {
+                0%,
+                100% {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 0.7;
+                }
+                50% {
+                    transform: scale(1.2) rotate(10deg);
+                    opacity: 1;
+                }
+            }
+
+            /* ============================================
+           CATS SECTION
+           ============================================ */
+            #chats h2 {
+                font-size: 3em;
+                color: #ffd700;
+                margin-bottom: 50px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .cats-container {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+
+            .cat-card {
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+
+            .cat-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .cat-card h3 {
+                font-size: 1.8em;
+                margin-top: 15px;
+                color: #ffd700;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+            .cat-image {
+                width: 150px;
+                height: 180px;
+                object-fit: contain;
+                filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+                transition: transform 0.3s ease;
+            }
+
+            .cat-card:hover .cat-image {
+                transform: scale(1.1);
+            }
+
+            /* ============================================
+           NOTE SECTION
+           ============================================ */
+            .note-card {
+                background: #fffef0;
+                color: #333;
+                padding: 50px;
+                border-radius: 5px;
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+                max-width: 600px;
+                position: relative;
+                transform: rotate(-1deg);
+            }
+
+            .note-card::before {
+                content: "";
+                position: absolute;
+                top: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 30px;
+                background: #c41e3a;
+                border-radius: 5px;
+            }
+
+            .note-card h2 {
+                color: #2e7d32;
+                font-size: 2.2em;
+                margin-bottom: 20px;
+            }
+
+            .note-card p {
+                font-size: 1.2em;
+                line-height: 1.8;
+                color: #555;
+            }
+
+            .signature {
+                margin-top: 30px;
+                font-style: italic;
+                font-size: 1.4em;
+                color: #c41e3a;
+            }
+
+            /* ============================================
+           GIFTS SECTION
+           ============================================ */
+            #cadeaux {
+                min-height: 100vh;
+                padding-bottom: 100px;
+            }
+
+            #cadeaux h2 {
+                font-size: 3em;
+                color: #ffd700;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Stylish click prompt */
+            .gift-prompt {
+                font-family: "Mountains of Christmas", cursive;
+                font-size: 1.5em;
+                color: #fff;
+                text-shadow:
+                    0 0 10px rgba(255, 215, 0, 0.5),
+                    2px 2px 4px rgba(0, 0, 0, 0.5);
+                margin-bottom: 30px;
+                animation: promptGlow 2s ease-in-out infinite;
+            }
+
+            @keyframes promptGlow {
+                0%,
+                100% {
+                    color: #fff;
+                    text-shadow:
+                        0 0 10px rgba(255, 215, 0, 0.5),
+                        2px 2px 4px rgba(0, 0, 0, 0.5);
+                }
+                50% {
+                    color: #ffd700;
+                    text-shadow:
+                        0 0 20px rgba(255, 215, 0, 0.8),
+                        0 0 30px rgba(255, 215, 0, 0.4),
+                        2px 2px 4px rgba(0, 0, 0, 0.5);
+                }
+            }
+
+            .gifts-container {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 60px;
+                flex-wrap: nowrap;
+                margin-top: 30px;
+                position: relative;
+            }
+
+            /* Ensure opened gift content doesn't overlap other gifts */
+            .gift-wrapper {
+                z-index: 1;
+            }
+
+            .gift-wrapper:has(.gift-box.opened) {
+                z-index: 200;
+            }
+
+            /* Gift Box Styling */
+            .gift-wrapper {
+                perspective: 1000px;
+                position: relative;
+            }
+
+            .gift-box {
+                position: relative;
+                width: 180px;
+                height: 180px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .gift-box:hover {
+                animation: cuteWiggle 1.2s ease-in-out infinite;
+            }
+
+            @keyframes cuteWiggle {
+                0%,
+                100% {
+                    transform: scale(1.03) rotate(0deg);
+                }
+                25% {
+                    transform: scale(1.05) rotate(-3deg);
+                }
+                50% {
+                    transform: scale(1.03) rotate(0deg);
+                }
+                75% {
+                    transform: scale(1.05) rotate(3deg);
+                }
+            }
+
+            .gift-box.opened {
+                animation: none;
+            }
+
+            /* When opened, hide lid and bow, show content */
+            .gift-box.opened .lid,
+            .gift-box.opened .bow {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .gift-box.opened .gift-content {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-220px);
+                z-index: 100;
+            }
+
+            /* Gift Base */
+            .gift-base {
+                position: absolute;
+                bottom: 0;
+                width: 180px;
+                height: 130px;
+                background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            }
+
+            .gift-base::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 35px;
+                height: 100%;
+                background: #ffd700;
+            }
+
+            .gift-base::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 35px;
+                background: #ffd700;
+            }
+
+            /* Gift Lid */
+            .lid {
+                position: absolute;
+                top: 10px;
+                left: -10px;
+                width: 200px;
+                height: 50px;
+                background: linear-gradient(135deg, #d64545 0%, #c41e3a 100%);
+                border-radius: 10px;
+                z-index: 2;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                transition: opacity 0.5s ease;
+            }
+
+            .lid::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 55px;
+                height: 100%;
+                background: #ffd700;
+            }
+
+            /* Bow */
+            .bow {
+                position: absolute;
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 3;
+                transition: opacity 0.5s ease;
+            }
+
+            .bow-loop {
+                width: 35px;
+                height: 25px;
+                background: #ffd700;
+                border-radius: 50%;
+                position: absolute;
+            }
+
+            .bow-loop:first-child {
+                left: -25px;
+                transform: rotate(-30deg);
+            }
+
+            .bow-loop:nth-child(2) {
+                right: -25px;
+                transform: rotate(30deg);
+            }
+
+            .bow-center {
+                width: 22px;
+                height: 22px;
+                background: #ffd700;
+                border-radius: 50%;
+                position: absolute;
+                left: 50%;
+                top: 8px;
+                transform: translateX(-50%);
+                z-index: 4;
+            }
+
+            /* Gift Content - Cards that pop out */
+            .gift-content {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 220px;
+                opacity: 0;
+                z-index: 50;
+                transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                pointer-events: none;
+            }
+
+            .gift-box.opened .gift-content {
+                pointer-events: auto;
+            }
+
+            /* Ticket Styling */
+            .ticket {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                color: #fff;
+                padding: 25px;
+                border-radius: 15px;
+                text-align: center;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+                border: 4px solid #ffd700;
+            }
+
+            .ticket h3 {
+                font-size: 1.4em;
+                color: #ffd700;
+                margin-bottom: 10px;
+            }
+
+            .ticket .date {
+                font-size: 1.6em;
+                font-weight: bold;
+                color: #00d4ff;
+            }
+
+            .ticket .emoji {
+                font-size: 2.5em;
+                margin: 10px 0;
+            }
+
+            .ticket .details {
+                font-size: 1em;
+                margin-top: 10px;
+                opacity: 0.9;
+            }
+
+            /* Gift Card Styling */
+            .giftcard {
+                background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+                color: #333;
+                padding: 25px;
+                border-radius: 15px;
+                text-align: center;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .giftcard h3 {
+                font-size: 1.3em;
+                color: #8b0000;
+                margin-bottom: 10px;
+            }
+
+            .giftcard .store {
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+
+            .giftcard .emoji {
+                font-size: 2.5em;
+                margin: 10px 0;
+            }
+
+            .giftcard .details {
+                font-size: 1em;
+                margin-top: 10px;
+            }
+
+            /* Cat Toys Gift Styling */
+            .cattoys {
+                background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+                color: #fff;
+                padding: 25px;
+                border-radius: 15px;
+                text-align: center;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .cattoys h3 {
+                font-size: 1.3em;
+                color: #fff;
+                margin-bottom: 10px;
+            }
+
+            .cattoys .emoji {
+                font-size: 2.5em;
+                margin: 10px 0;
+            }
+
+            .cattoys .details {
+                font-size: 1em;
+                margin-top: 10px;
+                opacity: 0.9;
+            }
+
+            .click-hint {
+                display: none;
+            }
+
+            /* Scroll hint for mobile gift section */
+            .scroll-hint-gifts {
+                display: none;
+                text-align: center;
+                margin-top: 15px;
+                font-size: 0.9em;
+                opacity: 0.7;
+                animation: swipeHint 2s ease-in-out infinite;
+            }
+
+            @keyframes swipeHint {
+                0%,
+                100% {
+                    transform: translateX(0);
+                    opacity: 0.5;
+                }
+                50% {
+                    transform: translateX(10px);
+                    opacity: 1;
+                }
+            }
+
+            /* ============================================
+           CLOSING SECTION
+           ============================================ */
+            #fin h2 {
+                font-size: 3.5em;
+                color: #ffd700;
+                margin-bottom: 40px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .final-avatars {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+
+            .final-avatars .avatar {
+                width: 140px;
+                height: 140px;
+            }
+
+            .stars-container {
+                font-size: 2em;
+                margin: 20px 0;
+            }
+
+            .stars-container span {
+                display: inline-block;
+                animation: floatStar 3s ease-in-out infinite;
+                margin: 0 5px;
+            }
+
+            .stars-container span:nth-child(2) {
+                animation-delay: 0.5s;
+            }
+            .stars-container span:nth-child(3) {
+                animation-delay: 1s;
+            }
+
+            @keyframes floatStar {
+                0%,
+                100% {
+                    transform: translateY(0) scale(1);
+                }
+                50% {
+                    transform: translateY(-10px) scale(1.1);
+                }
+            }
+
+            /* ============================================
+            RESPONSIVENESS
+           ============================================ */
+            @media (max-width: 768px) {
+                #hero h1 {
+                    font-size: 2.5em;
+                }
+
+                .message-card {
+                    padding: 25px;
+                }
+
+                .message-card p {
+                    font-size: 1.1em;
+                }
+
+                .avatar {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                .cats-container {
+                    gap: 15px;
+                }
+
+                .cat-image {
+                    width: 100px;
+                    height: 120px;
+                }
+
+                .note-card {
+                    padding: 30px;
+                    margin: 0 15px;
+                }
+
+                /* Mobile gift layout - fit all 3 in view */
+                .gifts-container {
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    gap: 15px;
+                    padding-top: 220px;
+                    margin-top: -180px;
+                }
+
+                .gift-wrapper {
+                    flex-shrink: 0;
+                }
+
+                .gift-box {
+                    width: 100px;
+                    height: 100px;
+                    margin: 0 auto;
+                }
+
+                .gift-base {
+                    width: 100px;
+                    height: 70px;
+                }
+
+                .gift-base::before {
+                    width: 22px;
+                }
+
+                .gift-base::after {
+                    height: 22px;
+                }
+
+                .lid {
+                    width: 115px;
+                    height: 32px;
+                    left: -7px;
+                    top: 5px;
+                }
+
+                .lid::before {
+                    width: 35px;
+                }
+
+                .bow {
+                    top: -12px;
+                }
+
+                .bow-loop {
+                    width: 22px;
+                    height: 16px;
+                }
+
+                .bow-loop:first-child {
+                    left: -16px;
+                }
+
+                .bow-loop:nth-child(2) {
+                    right: -16px;
+                }
+
+                .bow-center {
+                    width: 14px;
+                    height: 14px;
+                    top: 5px;
+                }
+
+                .gift-content {
+                    width: 160px;
+                }
+
+                .gift-box.opened .gift-content {
+                    transform: translateX(-50%) translateY(-150px);
+                }
+
+                /* Mobile gift cards - smaller but still readable */
+                .ticket,
+                .giftcard,
+                .cattoys {
+                    padding: 15px;
+                }
+
+                .ticket h3,
+                .giftcard h3,
+                .cattoys h3 {
+                    font-size: 1em;
+                }
+
+                .ticket .date {
+                    font-size: 1.2em;
+                }
+
+                .ticket .emoji,
+                .giftcard .emoji,
+                .cattoys .emoji {
+                    font-size: 1.6em;
+                    margin: 5px 0;
+                }
+
+                .ticket .details,
+                .giftcard .details,
+                .cattoys .details {
+                    font-size: 0.85em;
+                }
+
+                .click-hint {
+                    font-size: 0.7em;
+                    margin-top: 8px;
+                }
+
+                /* Hide scroll hint since we fit all gifts */
+                .scroll-hint-gifts {
+                    display: none;
+                }
+
+                #fin h2 {
+                    font-size: 2.5em;
+                }
+
+                .final-avatars .avatar {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+
+            /* Small mobile adjustments */
+            @media (max-width: 480px) {
+                .gifts-container {
+                    gap: 10px;
+                }
+
+                .gift-box {
+                    width: 90px;
+                    height: 90px;
+                }
+
+                .gift-base {
+                    width: 90px;
+                    height: 63px;
+                }
+
+                .gift-base::before {
+                    width: 20px;
+                }
+
+                .gift-base::after {
+                    height: 20px;
+                }
+
+                .lid {
+                    width: 105px;
+                    height: 28px;
+                    left: -7px;
+                }
+
+                .lid::before {
+                    width: 32px;
+                }
+
+                .gift-content {
+                    width: 145px;
+                }
+
+                .gift-box.opened .gift-content {
+                    transform: translateX(-50%) translateY(-140px);
+                }
+
+                .ticket,
+                .giftcard,
+                .cattoys {
+                    padding: 12px;
+                }
+
+                .ticket h3,
+                .giftcard h3,
+                .cattoys h3 {
+                    font-size: 0.9em;
+                }
+
+                .ticket .emoji,
+                .giftcard .emoji,
+                .cattoys .emoji {
+                    font-size: 1.4em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ============================================
+         CHRISTMAS SCENE BACKGROUND - STORY MODE
+         ============================================ -->
+        <div class="scene-background">
+            <!-- Aurora Borealis -->
+            <div class="aurora">
+                <div class="aurora-wave"></div>
+                <div class="aurora-wave"></div>
+                <div class="aurora-wave"></div>
+            </div>
+
+            <!-- Stars -->
+            <div class="stars" id="stars"></div>
+
+            <!-- Shooting stars -->
+            <div class="shooting-stars" id="shooting-stars"></div>
+
+            <!-- Magical floating particles -->
+            <div class="magical-particles" id="magical-particles"></div>
+
+            <!-- Moon -->
+            <div class="moon"></div>
+
+            <!-- Snow-covered hills -->
+            <div class="hills">
+                <div class="hill hill-back"></div>
+                <div class="hill hill-mid"></div>
+                <div class="hill hill-front"></div>
+            </div>
+
+            <!-- Trees -->
+            <div class="trees" id="trees"></div>
+
+            <!-- Animated cabin -->
+            <div class="cabin">
+                <div class="cabin-glow"></div>
+                <div class="cabin-chimney">
+                    <div class="smoke"></div>
+                    <div class="smoke"></div>
+                    <div class="smoke"></div>
+                </div>
+                <div class="cabin-roof"></div>
+                <div class="cabin-body">
+                    <div class="cabin-window" style="left: 10px"></div>
+                    <div class="cabin-window" style="left: 55px"></div>
+                    <div class="cabin-door"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+         SNOWFALL
+         ============================================ -->
+        <div class="snowflakes" aria-hidden="true">
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+            <div class="snowflake">*</div>
+        </div>
+
+        <!-- ============================================
+         SECTION 1: HERO
+         ============================================ -->
+        <section id="hero">
+            <div class="section-content visible">
+                <div class="hero-ornaments">
+                    <span class="hero-ornament">✨</span>
+                    <span class="hero-ornament">❄️</span>
+                    <span class="hero-ornament">🎄</span>
+                    <span class="hero-ornament">⭐</span>
+                </div>
+                <h1>Joyeux Noel Caroline!</h1>
+                <p class="subtitle">
+                    Voici ta petite carte de Noël interactive...
+                </p>
+                <div class="scroll-indicator">
+                    <span>👇</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 2: INTRO MESSAGE
+         ============================================ -->
+        <section id="intro">
+            <div class="section-content">
+                <div class="message-card">
+                    <!-- ═══════════════════════════════════════════════════════════════
+                     ✏️ MESSAGE PERSONNEL #1 - Message d'accueil
+                     Ecris ton message de bienvenue ici!
+                     ═══════════════════════════════════════════════════════════════ -->
+                    <p>
+                        Coucou ma belle. 👋 Je t'ai préparé un petit quelque
+                        chose cette année, continue de défiler pour voir la
+                        suite...
+                    </p>
+                    <!-- ═══════════════════════════════════════════════════════════════ -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 3: US TOGETHER
+         ============================================ -->
+        <section id="nous">
+            <div class="section-content">
+                <h2
+                    style="
+                        font-size: 2.5em;
+                        color: #ffd700;
+                        margin-bottom: 40px;
+                        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                    "
+                >
+                    Nous
+                </h2>
+                <div class="avatars-container">
+                    <img
+                        src="images/caroline.png"
+                        alt="Caroline"
+                        class="avatar"
+                    />
+                    <span class="sparkle">✨</span>
+                    <img
+                        src="images/patrick.png"
+                        alt="Patrick"
+                        class="avatar"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 4: THE CATS
+         ============================================ -->
+        <section id="chats">
+            <div class="section-content">
+                <h2>La Gang</h2>
+                <div class="cats-container">
+                    <div class="cat-card">
+                        <img
+                            src="images/fioche.png"
+                            alt="Fioche"
+                            class="cat-image"
+                        />
+                        <h3>Fioche</h3>
+                    </div>
+                    <div class="cat-card">
+                        <img
+                            src="images/gorgi.png"
+                            alt="Gorgi"
+                            class="cat-image"
+                        />
+                        <h3>Gorgi</h3>
+                    </div>
+                    <div class="cat-card">
+                        <img
+                            src="images/bouquet.png"
+                            alt="Bouquet"
+                            class="cat-image"
+                        />
+                        <h3>Bouquet</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 5: NOTE
+         ============================================ -->
+        <section id="message">
+            <div class="section-content">
+                <div class="note-card">
+                    <!-- ═══════════════════════════════════════════════════════════════
+                     ✏️ MESSAGE PERSONNEL #2 - Petit mot
+                     Ecris un petit message personnel ici!
+                     ═══════════════════════════════════════════════════════════════ -->
+                    <h2>Caroline,</h2>
+                    <p>
+                        Ecris ici ton message personnel...
+                        <br /><br />
+                        Un petit mot sympa pour accompagner les cadeaux!
+                    </p>
+                    <p class="signature">- Patrick</p>
+                    <!-- ═══════════════════════════════════════════════════════════════ -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 6: GIFTS
+         ============================================ -->
+        <section id="cadeaux">
+            <div class="section-content">
+                <h2>Tes Cadeaux!</h2>
+                <p class="gift-prompt">
+                    Clique sur les boites pour les ouvrir...
+                </p>
+                <p class="scroll-hint-gifts">
+                    Glisse pour voir tous les cadeaux
+                </p>
+
+                <div class="gifts-container">
+                    <!-- GIFT 1: Titanic Exhibition -->
+                    <div class="gift-wrapper">
+                        <div class="gift-box" onclick="toggleGift(this)">
+                            <div class="bow">
+                                <div class="bow-loop"></div>
+                                <div class="bow-loop"></div>
+                                <div class="bow-center"></div>
+                            </div>
+                            <div class="lid"></div>
+                            <div class="gift-base"></div>
+                            <div class="gift-content">
+                                <div class="ticket">
+                                    <div class="emoji">🚢</div>
+                                    <h3>Exposition Titanic</h3>
+                                    <p class="date">18 janvier</p>
+                                    <p class="details">2 billets pour nous!</p>
+                                </div>
+                            </div>
+                            <p class="click-hint">Clique pour ouvrir!</p>
+                        </div>
+                    </div>
+
+                    <!-- GIFT 2: Gift Card -->
+                    <div class="gift-wrapper">
+                        <div class="gift-box" onclick="toggleGift(this)">
+                            <div class="bow">
+                                <div class="bow-loop"></div>
+                                <div class="bow-loop"></div>
+                                <div class="bow-center"></div>
+                            </div>
+                            <div class="lid"></div>
+                            <div class="gift-base"></div>
+                            <div class="gift-content">
+                                <div class="giftcard">
+                                    <div class="emoji">🛍️</div>
+                                    <h3>Carte Cadeau</h3>
+                                    <p class="store">Promenades St-Bruno</p>
+                                    <p class="details">Pour te gater!</p>
+                                </div>
+                            </div>
+                            <p class="click-hint">Clique pour ouvrir!</p>
+                        </div>
+                    </div>
+
+                    <!-- GIFT 3: Cat Toys -->
+                    <div class="gift-wrapper">
+                        <div class="gift-box" onclick="toggleGift(this)">
+                            <div class="bow">
+                                <div class="bow-loop"></div>
+                                <div class="bow-loop"></div>
+                                <div class="bow-center"></div>
+                            </div>
+                            <div class="lid"></div>
+                            <div class="gift-base"></div>
+                            <div class="gift-content">
+                                <div class="cattoys">
+                                    <div class="emoji">🐱🎀🐭</div>
+                                    <h3>Jouets pour Chats</h3>
+                                    <p class="details">
+                                        Pour Fioche, Gorgi et Bouquet!
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="click-hint">Clique pour ouvrir!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+         SECTION 7: CLOSING
+         ============================================ -->
+        <section id="fin">
+            <div class="section-content">
+                <!-- ═══════════════════════════════════════════════════════════════
+                 ✏️ MESSAGE PERSONNEL #3 - Message de fin
+                 ═══════════════════════════════════════════════════════════════ -->
+                <h2>C'est fini!</h2>
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+
+                <div class="final-avatars">
+                    <img
+                        src="images/caroline.png"
+                        alt="Caroline"
+                        class="avatar"
+                    />
+                    <img
+                        src="images/patrick.png"
+                        alt="Patrick"
+                        class="avatar"
+                    />
+                </div>
+
+                <div class="stars-container">
+                    <span>⭐</span>
+                    <span>✨</span>
+                    <span>⭐</span>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════════
+                 ✏️ MESSAGE PERSONNEL #4 - Petit mot de la fin
+                 ═══════════════════════════════════════════════════════════════ -->
+                <p
+                    style="
+                        font-size: 1.3em;
+                        margin-top: 20px;
+                        opacity: 0.9;
+                        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                    "
+                >
+                    Trop hâte de passer les fêtes avec toi ! xx
+                </p>
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+            </div>
+        </section>
+
+        <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+        <script>
+            // ============================================
+            // GENERATE STARS
+            // ============================================
+            function generateStars() {
+                const starsContainer = document.getElementById("stars");
+                const starCount = 100;
+
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement("div");
+                    star.className = "star";
+                    star.style.left = Math.random() * 100 + "%";
+                    star.style.top = Math.random() * 100 + "%";
+                    star.style.width = Math.random() * 3 + 1 + "px";
+                    star.style.height = star.style.width;
+                    star.style.animationDelay = Math.random() * 3 + "s";
+                    star.style.animationDuration = Math.random() * 2 + 1 + "s";
+                    starsContainer.appendChild(star);
+                }
+            }
+
+            // ============================================
+            // GENERATE SHOOTING STARS
+            // ============================================
+            function generateShootingStars() {
+                const container = document.getElementById("shooting-stars");
+
+                for (let i = 0; i < 3; i++) {
+                    const shootingStar = document.createElement("div");
+                    shootingStar.className = "shooting-star";
+                    shootingStar.style.left = 20 + Math.random() * 60 + "%";
+                    shootingStar.style.top = 10 + Math.random() * 30 + "%";
+                    shootingStar.style.animationDelay =
+                        i * 7 + Math.random() * 3 + "s";
+                    container.appendChild(shootingStar);
+                }
+            }
+
+            // ============================================
+            // GENERATE MAGICAL FLOATING PARTICLES
+            // ============================================
+            function generateMagicalParticles() {
+                const container = document.getElementById("magical-particles");
+                const particleCount = 25;
+                const colors = ["gold", "white", "blue"];
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement("div");
+                    const colorClass =
+                        colors[Math.floor(Math.random() * colors.length)];
+                    particle.className = `particle ${colorClass}`;
+
+                    // Random size between 4px and 12px
+                    const size = 4 + Math.random() * 8;
+                    particle.style.width = size + "px";
+                    particle.style.height = size + "px";
+
+                    // Random horizontal position
+                    particle.style.left = Math.random() * 100 + "%";
+
+                    // Random animation duration between 15-30 seconds
+                    const duration = 15 + Math.random() * 15;
+                    particle.style.animationDuration = duration + "s";
+
+                    // Stagger the start times
+                    particle.style.animationDelay =
+                        Math.random() * duration + "s";
+
+                    container.appendChild(particle);
+                }
+            }
+
+            // ============================================
+            // GENERATE TREES
+            // ============================================
+            function generateTrees() {
+                const treesContainer = document.getElementById("trees");
+                const treePositions = [5, 15, 25, 40, 55, 70, 85, 95];
+
+                treePositions.forEach((pos, index) => {
+                    const tree = document.createElement("div");
+                    tree.className = "tree";
+                    tree.style.left = pos + "%";
+
+                    const scale = 0.5 + Math.random() * 0.5;
+                    const height = 80 + Math.random() * 60;
+
+                    // Add slight animation delay variation for each tree
+                    tree.style.animationDelay = index * 0.3 + "s";
+
+                    tree.innerHTML = `
+                    <div style="position: relative; transform: scale(${scale});">
+                        <div class="tree-trunk" style="width: 15px; height: 25px;"></div>
+                        <div class="tree-layer" style="bottom: 20px; border-width: 0 30px 50px 30px;"></div>
+                        <div class="tree-layer" style="bottom: 50px; border-width: 0 25px 45px 25px;"></div>
+                        <div class="tree-layer" style="bottom: 75px; border-width: 0 20px 40px 20px;"></div>
+                    </div>
+                `;
+
+                    treesContainer.appendChild(tree);
+                });
+            }
+
+            // ============================================
+            // PARALLAX SCROLLING EFFECT
+            // ============================================
+            function initParallax() {
+                const moon = document.querySelector(".moon");
+                const hillBack = document.querySelector(".hill-back");
+                const hillMid = document.querySelector(".hill-mid");
+                const hillFront = document.querySelector(".hill-front");
+                const trees = document.getElementById("trees");
+                const cabin = document.querySelector(".cabin");
+                const stars = document.getElementById("stars");
+
+                let ticking = false;
+
+                function updateParallax() {
+                    const scrollY = window.scrollY;
+                    const maxScroll =
+                        document.body.scrollHeight - window.innerHeight;
+                    const scrollPercent = scrollY / maxScroll;
+
+                    // Moon moves slowly upward as you scroll down
+                    if (moon) {
+                        moon.style.transform = `translateY(${scrollY * 0.15}px)`;
+                    }
+
+                    // Stars drift slightly
+                    if (stars) {
+                        stars.style.transform = `translateY(${scrollY * 0.05}px)`;
+                    }
+
+                    // Hills move at different speeds for depth effect
+                    if (hillBack) {
+                        hillBack.style.transform = `translateY(${scrollY * 0.08}px)`;
+                    }
+                    if (hillMid) {
+                        hillMid.style.transform = `translateY(${scrollY * 0.12}px)`;
+                    }
+                    if (hillFront) {
+                        hillFront.style.transform = `translateY(${scrollY * 0.18}px)`;
+                    }
+
+                    // Trees move faster (closer to viewer)
+                    if (trees) {
+                        trees.style.transform = `translateY(${scrollY * 0.2}px)`;
+                    }
+
+                    // Cabin moves with trees
+                    if (cabin) {
+                        cabin.style.transform = `translateY(${scrollY * 0.2}px)`;
+                    }
+
+                    ticking = false;
+                }
+
+                window.addEventListener("scroll", () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                });
+            }
+
+            // ============================================
+            // SCROLL ANIMATIONS
+            // ============================================
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.2,
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll(".section-content").forEach((section) => {
+                observer.observe(section);
+            });
+
+            // ============================================
+            // GIFT BOX INTERACTION - TOGGLE FUNCTION
+            // ============================================
+            function toggleGift(element) {
+                const wrapper = element.closest(".gift-wrapper");
+
+                if (element.classList.contains("opened")) {
+                    // Close the gift
+                    element.classList.remove("opened");
+                    wrapper.style.zIndex = "1";
+                } else {
+                    // Close any other open gifts first
+                    document
+                        .querySelectorAll(".gift-box.opened")
+                        .forEach((box) => {
+                            box.classList.remove("opened");
+                            box.closest(".gift-wrapper").style.zIndex = "1";
+                        });
+
+                    // Open the gift
+                    element.classList.add("opened");
+                    wrapper.style.zIndex = "200";
+                    createConfetti(element);
+                }
+            }
+
+            // ============================================
+            // CONFETTI EFFECT
+            // ============================================
+            function createConfetti(giftElement) {
+                const colors = [
+                    "#ffd700",
+                    "#c41e3a",
+                    "#228b22",
+                    "#ff6b6b",
+                    "#fff",
+                    "#e91e63",
+                ];
+                const confettiCount = 40;
+
+                const rect = giftElement.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + 50;
+
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement("div");
+                    confetti.style.cssText = `
+                    position: fixed;
+                    width: ${8 + Math.random() * 8}px;
+                    height: ${8 + Math.random() * 8}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${centerX}px;
+                    top: ${centerY}px;
+                    pointer-events: none;
+                    z-index: 10000;
+                    border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+                `;
+                    document.body.appendChild(confetti);
+
+                    const angle = Math.random() * 360 * (Math.PI / 180);
+                    const velocity = 8 + Math.random() * 12;
+                    const vx = Math.cos(angle) * velocity;
+                    const vy = Math.sin(angle) * velocity - 15;
+
+                    let x = centerX;
+                    let y = centerY;
+                    let rotation = 0;
+                    let opacity = 1;
+
+                    function animate() {
+                        x += vx;
+                        y += vy + 3;
+                        rotation += 15;
+                        opacity -= 0.015;
+
+                        confetti.style.left = x + "px";
+                        confetti.style.top = y + "px";
+                        confetti.style.transform = `rotate(${rotation}deg)`;
+                        confetti.style.opacity = opacity;
+
+                        if (opacity > 0) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            confetti.remove();
+                        }
+                    }
+
+                    setTimeout(() => requestAnimationFrame(animate), i * 20);
+                }
+            }
+
+            // ============================================
+            // INITIALIZE
+            // ============================================
+            document.addEventListener("DOMContentLoaded", () => {
+                generateStars();
+                generateShootingStars();
+                generateMagicalParticles();
+                generateTrees();
+                initParallax();
+                document
+                    .querySelector("#hero .section-content")
+                    .classList.add("visible");
+            });
+        </script>
+    </body>
+</html>
