@@ -2285,26 +2285,18 @@
                     font-size: 1.1em;
                 }
 
-                /* Story banners - more padding from edges */
-                .story-banner {
-                    margin-left: 15px;
-                    margin-right: 15px;
-                    padding: 25px 30px;
+                /* Bee banner - slight margin to keep bee on screen */
+                #nous .story-banner {
+                    margin-right: 20px;
                 }
 
                 .bee-container {
-                    bottom: -25px;
-                    right: -10px;
+                    right: -15px;
                 }
 
                 .bee {
-                    width: 45px;
-                    height: 45px;
-                }
-
-                .bee-hint {
-                    font-size: 0.75em;
-                    top: -22px;
+                    width: 48px;
+                    height: 48px;
                 }
 
                 .avatar {
@@ -3129,6 +3121,8 @@
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("visible");
+                    } else {
+                        entry.target.classList.remove("visible");
                     }
                 });
             }, observerOptions);
