@@ -1427,8 +1427,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 20px;
-                flex-wrap: wrap;
+                gap: 15px;
+                flex-wrap: nowrap;
             }
 
             .avatar {
@@ -1447,7 +1447,7 @@
             }
 
             .sparkle {
-                font-size: 2.5em;
+                font-size: 2em;
                 animation: sparkle 1.5s ease-in-out infinite;
             }
 
@@ -2300,17 +2300,29 @@
                 }
 
                 .avatar {
-                    width: 150px;
-                    height: 150px;
+                    width: 130px;
+                    height: 130px;
                 }
 
-                .cats-container {
+                .avatars-container {
                     gap: 15px;
                 }
 
+                .sparkle {
+                    font-size: 2em;
+                }
+
+                .cats-container {
+                    gap: 10px;
+                }
+
                 .cat-image {
-                    width: 100px;
-                    height: 120px;
+                    width: 90px;
+                    height: 110px;
+                }
+
+                .cat-card h3 {
+                    font-size: 1.4em;
                 }
 
                 .note-card {
