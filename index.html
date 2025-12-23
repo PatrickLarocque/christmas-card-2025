@@ -641,6 +641,9 @@
             .shake-hint span {
                 display: inline-block;
                 animation: shakeIcon 1s ease-in-out infinite;
+                font-size: 1.5em;
+                vertical-align: middle;
+                margin-right: 5px;
             }
 
             @keyframes shakeIcon {
@@ -1338,17 +1341,19 @@
             .scroll-indicator span {
                 display: block;
                 font-size: 2.5em;
-                animation: handBounce 1s ease-in-out infinite;
+                animation: arrowWiggle 1s ease-in-out infinite;
                 cursor: pointer;
             }
 
-            @keyframes handBounce {
-                0%,
-                100% {
-                    transform: translateY(0);
+            @keyframes arrowWiggle {
+                0%, 100% {
+                    transform: scale(1) rotate(0deg);
                 }
-                50% {
-                    transform: translateY(15px);
+                25% {
+                    transform: scale(1.1) rotate(-5deg);
+                }
+                75% {
+                    transform: scale(1.1) rotate(5deg);
                 }
             }
 
@@ -1813,10 +1818,10 @@
             .note-card {
                 background: #fffef0;
                 color: #333;
-                padding: 50px;
+                padding: 35px 40px;
                 border-radius: 5px;
                 box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-                max-width: 600px;
+                max-width: 500px;
                 position: relative;
                 transform: rotate(-1deg);
             }
@@ -1835,13 +1840,13 @@
 
             .note-card h2 {
                 color: #2e7d32;
-                font-size: 2.2em;
-                margin-bottom: 20px;
+                font-size: 1.8em;
+                margin-bottom: 15px;
             }
 
             .note-card p {
-                font-size: 1.2em;
-                line-height: 1.8;
+                font-size: 1.1em;
+                line-height: 1.6;
                 color: #555;
             }
 
@@ -2326,8 +2331,17 @@
                 }
 
                 .note-card {
-                    padding: 30px;
+                    padding: 25px 30px;
                     margin: 0 15px;
+                }
+
+                .note-card h2 {
+                    font-size: 1.5em;
+                }
+
+                .note-card p {
+                    font-size: 1em;
+                    line-height: 1.5;
                 }
 
                 /* Mobile gift layout - fit all 3 in view */
@@ -3159,12 +3173,22 @@
                 threshold: 0.2,
             };
 
+            let lastScrollY = window.scrollY;
+
             const observer = new IntersectionObserver((entries) => {
+                const currentScrollY = window.scrollY;
+                const scrollingDown = currentScrollY > lastScrollY;
+                lastScrollY = currentScrollY;
+
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("visible");
                     } else {
-                        entry.target.classList.remove("visible");
+                        // Only remove visible class if element is above viewport (scrolled past)
+                        const rect = entry.target.getBoundingClientRect();
+                        if (rect.bottom < 0) {
+                            entry.target.classList.remove("visible");
+                        }
                     }
                 });
             }, observerOptions);
